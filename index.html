@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <title>Formulario Datos del Colaborador</title>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <form name="form1" action="grupo_familiar.php" method="post" class="border p-3" onsubmit="return validateForm(this)">
+            <h2>Datos del Colaborador</h2>
+            <div class="form-group">
+                <label for="rutColaborador">RUT:</label>
+                <input type="text" class="form-control" id="rutColaborador" name="rutColaborador" required placeholder="Ingrese RUT">
+                <span id="rutValidationMessage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="nombresColaborador">Nombres:</label>
+                <input type text" class="form-control" name="nombresColaborador" id="nombresColaborador" oninput="toUppercase(this)">
+                <span id="namesValidationMessage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for "apellidoPaternoColaborador">Apellido Paterno:</label>
+                <input type="text" class="form-control" name="apellidoPaternoColaborador" id="apellidoPaternoColaborador" oninput="toUppercase(this)">
+                <span id="paternoValidationMessage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="apellidoMaternoColaborador">Apellido Materno:</label>
+                <input type="text" class="form-control" name="apellidoMaternoColaborador" id="apellidoMaternoColaborador" oninput="toUppercase(this)">
+                <span id="maternoValidationMessage" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Siguiente (Grupo Familiar)</button>
+        </form>
+    </div>
+    <script>
+        function toUppercase(input) {
+            input.value = input.value.toUpperCase();
+        }
+
+        function validateForm(form) {
+            const rutValidationMessage = document.getElementById("rutValidationMessage");
+            const rutValue = form.rutColaborador.value;
+            const nombresValue = form.nombresColaborador.value;
+            const paternoValue = form.apellidoPaternoColaborador.value;
+            const maternoValue = form.apellidoMaternoColaborador.value;
+
+            // Verificar que los campos no estén vacíos
+            if (rutValue.trim() === "" || nombresValue.trim() === "" || paternoValue.trim() === "" || maternoValue.trim() === "") {
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Todos los campos son obligatorios. Por favor, llénelos antes de enviar el formulario.'
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
